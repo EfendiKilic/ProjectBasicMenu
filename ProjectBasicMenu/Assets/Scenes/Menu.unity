@@ -157,6 +157,12 @@ MonoBehaviour:
   musicToggle: {fileID: 1525145781}
   effectToggle: {fileID: 732341598}
   gameSceneIndex: 1
+  playHoverSound: 1
+  playClickSound: 1
+  hoverSound: {fileID: 8300000, guid: a7d90a7c908eb8347bfbe18b54c6a0ce, type: 3}
+  clickSound: {fileID: 8300000, guid: a7ab886dcbd81a54490564f04a07dfc9, type: 3}
+  sfxAudioSource: {fileID: 1714405266}
+  musicAudioSource: {fileID: 1139543855}
 --- !u!4 &57086823
 Transform:
   m_ObjectHideFlags: 0
