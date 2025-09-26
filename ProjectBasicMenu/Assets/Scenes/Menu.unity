@@ -800,7 +800,7 @@ GameObject:
   m_Component:
   - component: {fileID: 653372122}
   m_Layer: 0
-  m_Name: AudioSources
+  m_Name: Menu_Audio_Sources
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1685,7 +1685,7 @@ GameObject:
   - component: {fileID: 1139543854}
   - component: {fileID: 1139543855}
   m_Layer: 0
-  m_Name: Music
+  m_Name: Menu_Music
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2519,7 +2519,7 @@ GameObject:
   - component: {fileID: 1714405265}
   - component: {fileID: 1714405266}
   m_Layer: 0
-  m_Name: SFX
+  m_Name: Menu_SFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
