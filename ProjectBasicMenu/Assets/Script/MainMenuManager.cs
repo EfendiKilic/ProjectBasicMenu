@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using UnityEngine.Video;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -10,6 +11,7 @@ public class MainMenuManager : MonoBehaviour
     [Header("Panels")]
     public GameObject MainPanel;
     public GameObject SettingPanel;
+    public GameObject BackgroundPanel;
     
     [Header("Buttons")]
     public Button playButton;
@@ -36,11 +38,33 @@ public class MainMenuManager : MonoBehaviour
     public AudioSource sfxAudioSource;
     public AudioSource musicAudioSource;
     
+    [Header("Background Video")]
+    public bool playBackgroundVideo = true;
+    public GameObject BackgroundClipArea;
+    public VideoClip backgroundVideoClip;
+    public bool videoMute = false;
+    [Range(0f, 1f)]
+    public float videoVolume = 1f;
+    [Range(0.1f, 2f)]
+    public float playbackSpeed = 1f;
+    
+    private VideoPlayer videoPlayer;
+    
     private void Start()
     {
         MainPanel.SetActive(true);
         SettingPanel.SetActive(false);
         
+        if (BackgroundClipArea != null)
+        {
+            videoPlayer = BackgroundClipArea.GetComponent<VideoPlayer>();
+            if (videoPlayer != null && backgroundVideoClip != null)
+            {
+                videoPlayer.clip = backgroundVideoClip;
+            }
+        }
+        
+        UpdateBackgroundVideoState();
         LoadSettings();
         
         playButton.onClick.AddListener(() => { PlayClickSound(); PlayGame(); });
@@ -52,6 +76,41 @@ public class MainMenuManager : MonoBehaviour
         effectToggle.onValueChanged.AddListener((bool value) => { PlayClickSound(); OnSFXToggleChanged(value); });
         
         AddHoverEvents();
+    }
+    
+    private void UpdateBackgroundVideoState()
+    {
+        if (playBackgroundVideo)
+        {
+            if (BackgroundPanel != null)
+                BackgroundPanel.SetActive(false);
+            
+            if (BackgroundClipArea != null)
+            {
+                BackgroundClipArea.SetActive(true);
+                if (videoPlayer != null)
+                {
+                    videoPlayer.SetDirectAudioMute(0, videoMute);
+                    videoPlayer.SetDirectAudioVolume(0, videoVolume);
+                    videoPlayer.playbackSpeed = playbackSpeed;
+                    videoPlayer.Play();
+                }
+            }
+        }
+        else
+        {
+            if (BackgroundPanel != null)
+                BackgroundPanel.SetActive(true);
+            
+            if (BackgroundClipArea != null)
+            {
+                BackgroundClipArea.SetActive(false);
+                if (videoPlayer != null)
+                {
+                    videoPlayer.Stop();
+                }
+            }
+        }
     }
     
     private void LoadSettings()

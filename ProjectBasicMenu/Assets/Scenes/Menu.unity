@@ -148,7 +148,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1736606709}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &57086824
@@ -165,6 +166,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MainPanel: {fileID: 350295025}
   SettingPanel: {fileID: 1654180056}
+  BackgroundPanel: {fileID: 1472534391}
   playButton: {fileID: 134498824}
   openSettingButton: {fileID: 912936674}
   closeSettingButton: {fileID: 1272070993}
@@ -178,6 +180,12 @@ MonoBehaviour:
   clickSound: {fileID: 8300000, guid: a7ab886dcbd81a54490564f04a07dfc9, type: 3}
   sfxAudioSource: {fileID: 2389113351410414895}
   musicAudioSource: {fileID: 8967333148497223262}
+  playBackgroundVideo: 1
+  BackgroundClipArea: {fileID: 1736606707}
+  backgroundVideoClip: {fileID: 32900000, guid: a8df25892baf76e45ae8b419e13a7219, type: 3}
+  videoMute: 1
+  videoVolume: 0.05
+  playbackSpeed: 1
 --- !u!1 &73439105
 GameObject:
   m_ObjectHideFlags: 0
@@ -1773,7 +1781,7 @@ GameObject:
   - component: {fileID: 1472534394}
   - component: {fileID: 1472534393}
   m_Layer: 5
-  m_Name: Background
+  m_Name: Background_Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1811,7 +1819,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.3660378, g: 0.34739056, b: 0.34739056, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2371,7 +2379,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1736606707}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: a8df25892baf76e45ae8b419e13a7219, type: 3}
+  m_VideoClip: {fileID: 0}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 330585545}
@@ -2407,12 +2415,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1736606707}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 57086823}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1825158521
 GameObject:
@@ -2978,4 +2986,3 @@ SceneRoots:
   - {fileID: 369894071}
   - {fileID: 57086823}
   - {fileID: 5266566220471555301}
-  - {fileID: 1736606709}
