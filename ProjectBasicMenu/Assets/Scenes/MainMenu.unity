@@ -128,7 +128,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 57086823}
-  - component: {fileID: 57086824}
   m_Layer: 0
   m_Name: Script
   m_TagString: Untagged
@@ -152,40 +151,6 @@ Transform:
   - {fileID: 1736606709}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &57086824
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 57086821}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82967ff0a679458418c7f08c19950e68, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MainPanel: {fileID: 350295025}
-  SettingPanel: {fileID: 1654180056}
-  BackgroundPanel: {fileID: 1472534391}
-  playButton: {fileID: 134498824}
-  openSettingButton: {fileID: 912936674}
-  closeSettingButton: {fileID: 1272070993}
-  quitButton: {fileID: 2021974368}
-  musicToggle: {fileID: 1525145781}
-  effectToggle: {fileID: 732341598}
-  gameSceneIndex: 1
-  playHoverSound: 1
-  playClickSound: 1
-  hoverSound: {fileID: 8300000, guid: a7d90a7c908eb8347bfbe18b54c6a0ce, type: 3}
-  clickSound: {fileID: 8300000, guid: a7ab886dcbd81a54490564f04a07dfc9, type: 3}
-  sfxAudioSource: {fileID: 2389113351410414895}
-  musicAudioSource: {fileID: 8967333148497223262}
-  playBackgroundVideo: 1
-  BackgroundClipArea: {fileID: 1736606707}
-  backgroundVideoClip: {fileID: 32900000, guid: 05949cd51e7de604197797f7c15b6eed, type: 3}
-  videoMute: 1
-  videoVolume: 0.05
-  playbackSpeed: 1
 --- !u!1 &73439105
 GameObject:
   m_ObjectHideFlags: 0
@@ -648,7 +613,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.34060255, g: 0.2808757, b: 0.3886792, a: 1}
+  m_Color: {r: 0.3886792, g: 0.3886792, b: 0.3886792, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1895,7 +1860,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.645283, g: 0.645283, b: 0.645283, a: 1}
+  m_Color: {r: 0.08679241, g: 0.08679241, b: 0.08679241, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2194,7 +2159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.3660378, g: 0.2590197, b: 0.112573855, a: 1}
+  m_Color: {r: 0.3433962, g: 0.33820271, b: 0.33108574, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2441,7 +2406,7 @@ GameObject:
   - component: {fileID: 1736606709}
   - component: {fileID: 1736606708}
   m_Layer: 0
-  m_Name: Background_Clip_Area
+  m_Name: Clip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -9,17 +9,18 @@ using UnityEditor;
 
 public class MainMenuManager : MonoBehaviour
 {
-    #region 1. Panel System
-    [Header("Panels")]
-    public GameObject MainPanel;
-    public GameObject SettingPanel;
-    
     private void Start()
     {
         InitializePanels();
         SetupBackgroundVideo();
         SetupButtons();
     }
+    
+    #region 1. Panel System
+    
+    [Header("Panels")]
+    public GameObject MainPanel;
+    public GameObject SettingPanel;
     
     private void InitializePanels()
     {
