@@ -167,7 +167,7 @@ MonoBehaviour:
   MainPanel: {fileID: 350295025}
   SettingPanel: {fileID: 1654180056}
   BackgroundPanel: {fileID: 1472534391}
-  playBackgroundVideo: 1
+  playBackgroundVideo: 0
   clip: {fileID: 1736606707}
   backgroundVideoClip: {fileID: 32900000, guid: 05949cd51e7de604197797f7c15b6eed, type: 3}
   videoMute: 1
@@ -180,7 +180,7 @@ MonoBehaviour:
   gameSceneIndex: 1
   musicToggle: {fileID: 1525145781}
   effectToggle: {fileID: 732341598}
-  playHoverSound: 1
+  playHoverSound: 0
   playClickSound: 1
   hoverSound: {fileID: 8300000, guid: a7d90a7c908eb8347bfbe18b54c6a0ce, type: 3}
   clickSound: {fileID: 8300000, guid: a7ab886dcbd81a54490564f04a07dfc9, type: 3}
