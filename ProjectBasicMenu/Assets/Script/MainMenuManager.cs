@@ -6,37 +6,42 @@ using UnityEngine.Video;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
+
 public class MainMenuManager : MonoBehaviour
 {
+    #region 1. Panel System
     [Header("Panels")]
     public GameObject MainPanel;
     public GameObject SettingPanel;
+    
+    private void Start()
+    {
+        InitializePanels();
+        SetupBackgroundVideo();
+        SetupButtons();
+    }
+    
+    private void InitializePanels()
+    {
+        MainPanel.SetActive(true);
+        SettingPanel.SetActive(false);
+    }
+    
+    private void OpenSettings()
+    {
+        MainPanel.SetActive(false);
+        SettingPanel.SetActive(true);
+    }
+    
+    private void CloseSettings()
+    {
+        MainPanel.SetActive(true);
+        SettingPanel.SetActive(false);
+    }
+    #endregion
+
+    #region 2. Background Video System
     public GameObject BackgroundPanel;
-    
-    [Header("Buttons")]
-    public Button playButton;
-    public Button openSettingButton;
-    public Button closeSettingButton;
-    public Button quitButton;
-    
-    [Header("Toggles")]
-    public Toggle musicToggle;
-    public Toggle effectToggle;
-    
-    [Header("Scene")]
-    public int gameSceneIndex;
-    
-    [Header("Audio Settings")]
-    public bool playHoverSound = true;
-    public bool playClickSound = true;
-    
-    [Header("Audio Clips")]
-    public AudioClip hoverSound;
-    public AudioClip clickSound;
-    
-    [Header("Audio Source")]
-    public AudioSource sfxAudioSource;
-    public AudioSource musicAudioSource;
     
     [Header("Background Video")]
     public bool playBackgroundVideo = true;
@@ -50,11 +55,8 @@ public class MainMenuManager : MonoBehaviour
     
     private VideoPlayer videoPlayer;
     
-    private void Start()
+    private void SetupBackgroundVideo()
     {
-        MainPanel.SetActive(true);
-        SettingPanel.SetActive(false);
-        
         if (BackgroundClipArea != null)
         {
             videoPlayer = BackgroundClipArea.GetComponent<VideoPlayer>();
@@ -65,17 +67,6 @@ public class MainMenuManager : MonoBehaviour
         }
         
         UpdateBackgroundVideoState();
-        LoadSettings();
-        
-        playButton.onClick.AddListener(() => { PlayClickSound(); PlayGame(); });
-        openSettingButton.onClick.AddListener(() => { PlayClickSound(); OpenSettings(); });
-        closeSettingButton.onClick.AddListener(() => { PlayClickSound(); CloseSettings(); });
-        quitButton.onClick.AddListener(() => { PlayClickSound(); QuitGame(); });
-        
-        musicToggle.onValueChanged.AddListener((bool value) => { PlayClickSound(); OnMusicToggleChanged(value); });
-        effectToggle.onValueChanged.AddListener((bool value) => { PlayClickSound(); OnSFXToggleChanged(value); });
-        
-        AddHoverEvents();
     }
     
     private void UpdateBackgroundVideoState()
@@ -112,6 +103,57 @@ public class MainMenuManager : MonoBehaviour
             }
         }
     }
+    #endregion
+
+    #region 3. Button System
+    [Header("Buttons")]
+    public Button playButton;
+    public Button openSettingButton;
+    public Button closeSettingButton;
+    public Button quitButton;
+    
+    [Header("Scene")]
+    public int gameSceneIndex;
+    
+    private void SetupButtons()
+    {
+        playButton.onClick.AddListener(PlayGame);
+        openSettingButton.onClick.AddListener(OpenSettings);
+        closeSettingButton.onClick.AddListener(CloseSettings);
+        quitButton.onClick.AddListener(QuitGame);
+        
+        SetupToggleSystem();
+    }
+    
+    private void PlayGame()
+    {
+        SceneManager.LoadScene(gameSceneIndex);
+    }
+    
+    private void QuitGame()
+    {
+#if UNITY_EDITOR
+        EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+    }
+    #endregion
+
+    #region 4. Settings Toggle System
+    [Header("Toggles")]
+    public Toggle musicToggle;
+    public Toggle effectToggle;
+    
+    private void SetupToggleSystem()
+    {
+        LoadSettings();
+        
+        musicToggle.onValueChanged.AddListener(OnMusicToggleChanged);
+        effectToggle.onValueChanged.AddListener(OnSFXToggleChanged);
+        
+        SetupAudioSystem();
+    }
     
     private void LoadSettings()
     {
@@ -120,8 +162,6 @@ public class MainMenuManager : MonoBehaviour
         
         effectToggle.isOn = sfxEnabled;
         musicToggle.isOn = musicEnabled;
-        
-        UpdateAudioSourcesMute();
     }
     
     private void OnMusicToggleChanged(bool value)
@@ -137,6 +177,27 @@ public class MainMenuManager : MonoBehaviour
         PlayerPrefs.Save();
         UpdateAudioSourcesMute();
     }
+    #endregion
+
+    #region 5. Audio System
+    [Header("Audio Settings")]
+    public bool playHoverSound = true;
+    public bool playClickSound = true;
+    
+    [Header("Audio Clips")]
+    public AudioClip hoverSound;
+    public AudioClip clickSound;
+    
+    [Header("Audio Source")]
+    public AudioSource sfxAudioSource;
+    public AudioSource musicAudioSource;
+    
+    private void SetupAudioSystem()
+    {
+        UpdateAudioSourcesMute();
+        AddClickSounds();
+        AddHoverEvents();
+    }
     
     private void UpdateAudioSourcesMute()
     {
@@ -149,6 +210,25 @@ public class MainMenuManager : MonoBehaviour
         {
             musicAudioSource.mute = !musicToggle.isOn;
         }
+    }
+    
+    private void AddClickSounds()
+    {
+        playButton.onClick.RemoveAllListeners();
+        openSettingButton.onClick.RemoveAllListeners();
+        closeSettingButton.onClick.RemoveAllListeners();
+        quitButton.onClick.RemoveAllListeners();
+        
+        playButton.onClick.AddListener(() => { PlayClickSound(); PlayGame(); });
+        openSettingButton.onClick.AddListener(() => { PlayClickSound(); OpenSettings(); });
+        closeSettingButton.onClick.AddListener(() => { PlayClickSound(); CloseSettings(); });
+        quitButton.onClick.AddListener(() => { PlayClickSound(); QuitGame(); });
+        
+        musicToggle.onValueChanged.RemoveAllListeners();
+        effectToggle.onValueChanged.RemoveAllListeners();
+        
+        musicToggle.onValueChanged.AddListener((bool value) => { PlayClickSound(); OnMusicToggleChanged(value); });
+        effectToggle.onValueChanged.AddListener((bool value) => { PlayClickSound(); OnSFXToggleChanged(value); });
     }
     
     private void AddHoverEvents()
@@ -209,30 +289,5 @@ public class MainMenuManager : MonoBehaviour
             sfxAudioSource.PlayOneShot(clickSound);
         }
     }
-
-    private void PlayGame()
-    {
-        SceneManager.LoadScene(gameSceneIndex);
-    }
-
-    private void OpenSettings()
-    {
-        MainPanel.SetActive(false);
-        SettingPanel.SetActive(true);
-    }
-    
-    private void CloseSettings()
-    {
-        MainPanel.SetActive(true);
-        SettingPanel.SetActive(false);
-    }
-    
-    private void QuitGame()
-    {
-#if UNITY_EDITOR
-        EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
-#endif
-    }
+    #endregion
 }
