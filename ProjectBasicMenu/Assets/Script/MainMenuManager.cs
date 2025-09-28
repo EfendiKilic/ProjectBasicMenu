@@ -46,7 +46,7 @@ public class MainMenuManager : MonoBehaviour
     
     [Header("Background Video")]
     public bool playBackgroundVideo = true;
-    public GameObject BackgroundClipArea;
+    public GameObject clip;
     public VideoClip backgroundVideoClip;
     public bool videoMute = false;
     [Range(0f, 1f)]
@@ -58,9 +58,9 @@ public class MainMenuManager : MonoBehaviour
     
     private void SetupBackgroundVideo()
     {
-        if (BackgroundClipArea != null)
+        if (clip != null)
         {
-            videoPlayer = BackgroundClipArea.GetComponent<VideoPlayer>();
+            videoPlayer = clip.GetComponent<VideoPlayer>();
             if (videoPlayer != null && backgroundVideoClip != null)
             {
                 videoPlayer.clip = backgroundVideoClip;
@@ -77,9 +77,9 @@ public class MainMenuManager : MonoBehaviour
             if (BackgroundPanel != null)
                 BackgroundPanel.SetActive(false);
             
-            if (BackgroundClipArea != null)
+            if (clip != null)
             {
-                BackgroundClipArea.SetActive(true);
+                clip.SetActive(true);
                 if (videoPlayer != null)
                 {
                     videoPlayer.SetDirectAudioMute(0, videoMute);
@@ -94,9 +94,9 @@ public class MainMenuManager : MonoBehaviour
             if (BackgroundPanel != null)
                 BackgroundPanel.SetActive(true);
             
-            if (BackgroundClipArea != null)
+            if (clip != null)
             {
-                BackgroundClipArea.SetActive(false);
+                clip.SetActive(false);
                 if (videoPlayer != null)
                 {
                     videoPlayer.Stop();
