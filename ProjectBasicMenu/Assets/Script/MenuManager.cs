@@ -4,16 +4,16 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-    #region 1. Panel System
-    [Header("Panels")]
-    public GameObject InGamePanel;
-    public GameObject PausePanel;
-    
     private void Start()
     {
         InitializePanels();
         SetupButtons();
     }
+    
+    #region 1. Panel System
+    [Header("Panels")]
+    public GameObject InGamePanel;
+    public GameObject PausePanel;
     
     private void InitializePanels()
     {
@@ -71,7 +71,7 @@ public class MenuManager : MonoBehaviour
     public AudioClip clickSound;
     
     [Header("Audio Sources")]
-    public AudioSource audioSource;
+    public AudioSource sfxAudioSource;
     public AudioSource musicAudioSource;
     
     private bool sfxEnabled;
@@ -133,17 +133,17 @@ public class MenuManager : MonoBehaviour
     
     private void PlayHoverSound()
     {
-        if (playHoverSound && sfxEnabled && hoverSound != null && audioSource != null)
+        if (playHoverSound && sfxEnabled && hoverSound != null && sfxAudioSource != null)
         {
-            audioSource.PlayOneShot(hoverSound);
+            sfxAudioSource.PlayOneShot(hoverSound);
         }
     }
     
     private void PlayClickSound()
     {
-        if (playClickSound && sfxEnabled && clickSound != null && audioSource != null)
+        if (playClickSound && sfxEnabled && clickSound != null && sfxAudioSource != null)
         {
-            audioSource.PlayOneShot(clickSound);
+            sfxAudioSource.PlayOneShot(clickSound);
         }
     }
     #endregion
